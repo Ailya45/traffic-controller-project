@@ -84,7 +84,7 @@ class AppConcurrencia:
         header_frame.pack_propagate(False)
         
         # Botón para volver al menú con diseño mejorado
-        self.back_button = tk.Button(header_frame, text="← Menú Principal", 
+        self.back_button = tk.Button(header_frame, text="← Menú", 
                                     bg="#4a5568", fg="white",
                                     font=("Arial", 9, "bold"),
                                     relief="flat",
@@ -93,7 +93,7 @@ class AppConcurrencia:
         self.back_button.place(x=15, y=20)
         
         # Título centrado
-        tk.Label(header_frame, text="Simulador de Bloqueo de Archivos", 
+        tk.Label(header_frame, text="SIMULADOR DE BLOQUEO DE ARCHIVOS", 
                 font=("Arial", 16, "bold"), 
                 bg="#ffffff", fg="#2d3748").place(relx=0.5, rely=0.5, anchor="center")
 
@@ -114,7 +114,7 @@ class AppConcurrencia:
         card_visual.pack(fill=tk.BOTH, expand=True)
         
         # Título de la tarjeta
-        tk.Label(card_visual, text="📊 Visualización del Archivo", 
+        tk.Label(card_visual, text="Visualización del archivo", 
                 font=("Arial", 12, "bold"),
                 bg="#ffffff", fg="#2d3748").pack(anchor="w", padx=20, pady=(15, 10))
         
@@ -186,7 +186,7 @@ class AppConcurrencia:
         card_graph.pack(fill=tk.BOTH, expand=True)
         
         # Título de la gráfica
-        tk.Label(card_graph, text="📈 Actividad en Tiempo Real", 
+        tk.Label(card_graph, text="📊Actividad en tiempo real", 
                 font=("Arial", 12, "bold"),
                 bg="#ffffff", fg="#2d3748").pack(anchor="w", padx=20, pady=(15, 10))
         
@@ -232,7 +232,7 @@ class AppConcurrencia:
         card_controls = tk.Frame(left_frame, bg="#ffffff", relief="flat")
         card_controls.pack(fill=tk.X, pady=(10, 0))
         
-        tk.Label(card_controls, text="🎮 Control de Hilos", 
+        tk.Label(card_controls, text="Control de hilos", 
                 font=("Arial", 12, "bold"),
                 bg="#ffffff", fg="#2d3748").pack(anchor="w", padx=20, pady=(15, 10))
         
@@ -241,7 +241,7 @@ class AppConcurrencia:
         btn_frame.pack(padx=20, pady=(0, 15))
         
         # Botón Añadir Lector
-        self.btn_reader = tk.Button(btn_frame, text="📖 Añadir Lector", 
+        self.btn_reader = tk.Button(btn_frame, text="Añadir lector", 
                                    bg="#4299e1", fg="white", 
                                    font=("Arial", 11, "bold"),
                                    relief="flat",
@@ -252,7 +252,7 @@ class AppConcurrencia:
         self.btn_reader.pack(side=tk.LEFT, padx=5)
         
         # Botón Añadir Escritor
-        self.btn_writer = tk.Button(btn_frame, text="✏️ Añadir Escritor", 
+        self.btn_writer = tk.Button(btn_frame, text="Añadir escritor", 
                                    bg="#f56565", fg="white", 
                                    font=("Arial", 11, "bold"),
                                    relief="flat",
@@ -266,47 +266,48 @@ class AppConcurrencia:
         card_logs = tk.Frame(self.main_frame, bg="#ffffff", relief="flat")
         card_logs.pack(fill=tk.BOTH, expand=True, padx=20, pady=10)
         
-        # Cabecera de logs
+        # Cabecera de logs con botón de limpiar
         log_header = tk.Frame(card_logs, bg="#2d3748")
         log_header.pack(fill=tk.X, padx=2, pady=2)
         
-        tk.Label(log_header, text="📋 Eventos del Sistema", 
-                font=("Arial", 11, "bold"),
-                bg="#2d3748", fg="white").pack(side=tk.LEFT, padx=15, pady=8)
+        # Título alineado a la izquierda
+        tk.Label(log_header, text="Eventos del sistema", 
+            font=("Arial", 11, "bold"),
+            bg="#2d3748", fg="white").pack(side=tk.LEFT, padx=15, pady=8)
+        
+        # Frame para elementos derechos (contador y botón)
+        header_right = tk.Frame(log_header, bg="#2d3748")
+        header_right.pack(side=tk.RIGHT, padx=10, pady=8)
         
         # Contador de eventos
         self.event_count = 0
-        self.event_label = tk.Label(log_header, text="Eventos: 0",
-                                   font=("Arial", 9),
-                                   bg="#2d3748",
-                                   fg="#cbd5e0")
-        self.event_label.pack(side=tk.RIGHT, padx=15, pady=8)
+        self.event_label = tk.Label(header_right, text="Eventos: 0",
+            font=("Arial", 9),
+            bg="#2d3748",
+            fg="#cbd5e0")
+        self.event_label.pack(side=tk.LEFT, padx=(0, 10))
         
-        # Área de logs con scroll
+        # Botón para limpiar logs VISIBLE en el header
+        self.btn_clear = tk.Button(header_right, text="Limpiar Registros",
+            bg="#718096", fg="white",
+            font=("Arial", 9, "bold"),
+            relief="flat",
+            padx=12, pady=4,
+            activebackground="#4a5568",
+            activeforeground="white",
+            command=self.clear_logs)
+        self.btn_clear.pack(side=tk.LEFT)
+        
+        # Área de logs con scroll - REDUCIDA la altura para mejor visualización
         self.log_area = scrolledtext.ScrolledText(card_logs, 
-                                                 width=85, 
-                                                 height=10, 
-                                                 bg="#1a202c", 
-                                                 fg="#e2e8f0", 
-                                                 font=("Consolas", 9),
-                                                 relief="flat",
-                                                 bd=0)
-        self.log_area.pack(fill=tk.BOTH, expand=True, padx=2, pady=(0, 2))
-        
-        # Pie de la tarjeta de logs
-        log_footer = tk.Frame(card_logs, bg="#ffffff")
-        log_footer.pack(fill=tk.X, padx=2, pady=2)
-        
-        # Botón para limpiar logs con diseño moderno
-        self.btn_clear = tk.Button(log_footer, text="🗑️ Limpiar Registros",
-                                  bg="#718096", fg="white",
-                                  font=("Arial", 8, "bold"),
-                                  relief="flat",
-                                  padx=12, pady=4,
-                                  activebackground="#4a5568",
-                                  activeforeground="white",
-                                  command=self.clear_logs)
-        self.btn_clear.pack(side=tk.RIGHT, padx=10, pady=5)
+            width=85, 
+            height=8,  # Cambiado de 10 a 8
+            bg="#1a202c", 
+            fg="#e2e8f0", 
+            font=("Consolas", 9),
+            relief="flat",
+            bd=0)
+        self.log_area.pack(fill=tk.BOTH, expand=True, padx=2, pady=2)
 
         # Configurar tags para el log con colores modernos
         self.log_area.tag_config("warning", foreground="#f6ad55")
@@ -562,7 +563,7 @@ class StartScreen:
         btn_container.pack()
 
         # Botón Iniciar
-        btn_start = tk.Button(btn_container, text="🚀 Iniciar Simulación", 
+        btn_start = tk.Button(btn_container, text="Iniciar simulación", 
                              bg="#48bb78", fg="white", 
                              font=("Arial", 12, "bold"),
                              relief="flat",
@@ -573,7 +574,7 @@ class StartScreen:
         btn_start.grid(row=0, column=0, pady=8, padx=5)
 
         # Botón Ayuda
-        btn_help = tk.Button(btn_container, text="❓ Ayuda Rápida", 
+        btn_help = tk.Button(btn_container, text="Ayuda rápida", 
                             bg="#4299e1", fg="white", 
                             font=("Arial", 12, "bold"),
                             relief="flat",
@@ -584,7 +585,7 @@ class StartScreen:
         btn_help.grid(row=1, column=0, pady=8, padx=5)
 
         # Botón Soporte
-        btn_support = tk.Button(btn_container, text="🔗 Soporte Técnico", 
+        btn_support = tk.Button(btn_container, text="Soporte técnico", 
                                bg="#9f7aea", fg="white", 
                                font=("Arial", 12, "bold"),
                                relief="flat",
@@ -595,7 +596,7 @@ class StartScreen:
         btn_support.grid(row=2, column=0, pady=8, padx=5)
 
         # Botón Salir
-        btn_exit = tk.Button(btn_container, text="❌ Salir", 
+        btn_exit = tk.Button(btn_container, text="Salir", 
                             bg="#f56565", fg="white", 
                             font=("Arial", 12, "bold"),
                             relief="flat",
@@ -609,7 +610,7 @@ class StartScreen:
         footer_frame = tk.Frame(self.frame, bg="#f0f2f5")
         footer_frame.pack(side=tk.BOTTOM, fill=tk.X, pady=20)
         
-        tk.Label(footer_frame, text="Simulador educativo - Sistema de lectores/escritores", 
+        tk.Label(footer_frame, text="Simulador educativo - Sistema de lectores/escritores \n Proyecto realizado por Jesus Vasquez, Bermys Santana y Jose Velazque", 
                 font=("Arial", 9),
                 bg="#f0f2f5",
                 fg="#a0aec0").pack()
