@@ -34,6 +34,7 @@ Maneja la ventana principal de simulación, incluyendo:
 * **Canvas:** Representación visual del "archivo" donde aparecen y desaparecen los hilos.
 * **Control de Logs:** Una zona de texto con scroll que reporta cada acción del sistema.
 * **Botones de Acción:** Permiten generar hilos de lectura o escritura de forma aleatoria y asíncrona.
+* **Gráfica de Actividad:** Monitorización mediante una gráfica de líneas que registra la carga de hilos activos.
 
 ### 3. Pantalla de Inicio (`StartScreen`)
 
@@ -56,11 +57,16 @@ Cada hilo (lector o escritor) sigue este ciclo:
 
 ## 🛠️ Instalación y Uso
 
+**Opción A)**
 1. **Requisitos:** Tener instalado Python 3.x.
 2. **Ejecución:**
 ```bash
-python nombre_del_archivo.py
-
+python ProcessLock.py
+```
+**Opción B)**
+1. **Abrir el archivo ejecutable (.exe)**
+```bash
+TrafficController.exe
 ```
 
 
